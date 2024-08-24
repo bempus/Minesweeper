@@ -224,3 +224,5 @@ document
     e.target.textContent = "X";
   });
 document.querySelector("#reset").addEventListener("click", newGame);
+
+newGame();
