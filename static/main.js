@@ -80,7 +80,6 @@ const newGame = () => {
       if (firstClick) {
         mines.delete(e.target.id);
         while (mines.size < config.mines) {
-          console.log("Mine on first click");
           addMine(e.target.id);
         }
         return handleClick(e);
@@ -136,20 +135,20 @@ const newGame = () => {
       col.classList.add("col");
       row.appendChild(col);
       col.id = `c${i}_${j}`;
-      col.addEventListener("click", handleClick);
-      col.addEventListener("contextmenu", handleRightClick);
+      col.onclick = handleClick;
+      col.oncontextmenu = handleRightClick;
     }
     document.querySelector(".game").appendChild(row);
   }
 
   const revealAll = () => {
-    firstClick = false;
     document.querySelectorAll(".col").forEach((el) => {
       el.setAttribute("revealed", true);
       if (mines.has(el.id)) {
         el.classList.add("exploded");
         return;
       }
+
       const adjacentIds = getAdjacentIds(el.id);
       const adjacentMinesCount = adjacentMines(adjacentIds);
 
@@ -161,11 +160,9 @@ const newGame = () => {
       el.style.backgroundImage = `url(./img/numbers/${adjacentMinesCount}.svg)`;
     });
   };
-
-  document.querySelector("#revealAll").addEventListener("click", revealAll);
+  document.querySelector("#revealAll").onclick = revealAll;
 };
 
-newGame();
 const gridSetting = document.querySelector("#grid");
 
 const updateRows = () => {
@@ -214,10 +211,6 @@ const updateSize = (e) => {
 
 sizeSetting.addEventListener("input", updateSize);
 
-document.querySelector("#reset").addEventListener("click", () => {
-  newGame();
-});
-
 document
   .querySelector("#toggle-settings-button")
   .addEventListener("click", (e) => {
@@ -230,3 +223,4 @@ document
     aside.setAttribute("expanded", true);
     e.target.textContent = "X";
   });
+document.querySelector("#reset").addEventListener("click", newGame);
