@@ -17,6 +17,7 @@ const setFace = (face) => {
 const gameBoard = document.querySelector(".game");
 
 const newGame = () => {
+  gameBoard.removeAttribute("win");
   if (config.mines > config.maxMines) config.mines = config.maxMines;
   if (config.rows < config.minRows) config.rows = config.minRows;
   gameOver = false;
@@ -265,13 +266,6 @@ main.addEventListener(
 main.addEventListener("mouseout", (e) => setFace());
 main.addEventListener("mouseup", (e) => {
   if (e.button === 2) {
-    const ctxEvt = new MouseEvent("contextmenu", {
-      bubbles: false,
-      cancelable: false,
-      button: 2,
-      buttons: 0,
-    });
-
     e.target.dispatchEvent();
     return;
   }
