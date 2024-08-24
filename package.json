@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "express": "^4.19.2",
+    "yarn": "^1.22.22"
+  },
+  "name": "minesweeper",
+  "version": "1.0.0",
+  "description": "Minesweeper built with Javascript",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
