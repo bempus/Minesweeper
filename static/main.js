@@ -11,7 +11,6 @@ const resetBtn = document.querySelector("#reset");
 const resBtnImg = resetBtn.querySelector("img");
 
 const setFace = (face) => {
-  if (gameOver) return;
   resBtnImg.src = `./img/face/${face || defaultFace}_nb.png`;
 };
 
@@ -260,7 +259,11 @@ document
 
 resetBtn.addEventListener("click", newGame);
 const main = document.querySelector("main");
-main.addEventListener("mouseover", (e) => e.buttons === 1 && setFace("scared"));
+
+main.addEventListener(
+  "mouseover",
+  (e) => e.buttons === 1 && !gameOver && setFace("scared")
+);
 
 main.addEventListener("mouseout", (e) => setFace());
 main.addEventListener("mouseup", (e) => setFace());
