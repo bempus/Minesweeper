@@ -20,6 +20,9 @@ const newGame = () => {
     const mine = `c${Math.floor(Math.random() * config.rows)}_${Math.floor(
       Math.random() * config.rows
     )}`;
+    if (document.querySelector("#cheat").checked) {
+      if (document.querySelector(`#${mine}[revealed]`)) return;
+    }
     if (mine === exclude) return;
     mines.add(mine);
   };
@@ -78,7 +81,7 @@ const newGame = () => {
     if (e.target.getAttribute("revealed")) return;
     if (e.target.getAttribute("flagged")) return;
     if (mines.has(e.target.id)) {
-      if (firstClick) {
+      if (firstClick || document.querySelector("#cheat").checked) {
         mines.delete(e.target.id);
         while (mines.size < config.mines) {
           addMine(e.target.id);
