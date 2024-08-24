@@ -1,0 +1,119 @@
+* {
+  box-sizing: border-box;
+}
+:root {
+  font-size: 24px;
+  --boxSize: 1em;
+  --rowCount: 16;
+  --width: calc(var(--rowCount) * var(--rowSize));
+  --height: var(--width);
+}
+body,
+html {
+  padding: 0;
+  margin: 0;
+}
+aside {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  padding-block: 0.5rem;
+  padding-inline: 0.3rem;
+  background: #eee;
+  border-inline-end: 3px solid #0004;
+  border-block-end: 3px solid #000a;
+  width: 0.5em;
+  min-width: max-content;
+}
+
+aside[expanded] {
+  width: max-content;
+}
+
+aside[expanded] #settings {
+  display: block;
+}
+
+#toggle-settings {
+  text-align: center;
+}
+
+aside[expanded] #toggle-settings {
+  text-align: end;
+}
+
+#settings {
+  display: none;
+  text-align: start;
+  font-size: 0.8rem;
+  user-select: none;
+}
+.game {
+  height: var(--height);
+  width: var(--width);
+  border: 1px solid;
+}
+
+body {
+  display: grid;
+  place-content: center;
+  text-align: center;
+  gap: 0.25rem;
+}
+
+.col {
+  width: var(--boxSize);
+  height: var(--boxSize);
+  border: 1px solid;
+  background-size: contain;
+}
+
+.row {
+  display: flex;
+}
+
+.col {
+  text-rendering: auto;
+  stroke-opacity: 0;
+  stroke: #000000;
+  stroke-width: 0;
+  stroke-linecap: square;
+  stroke-linejoin: bevel;
+  letter-spacing: 0;
+  text-anchor: middle;
+  word-spacing: 0;
+  text-align: center;
+  font-family: Kristen ITC;
+  font-size: 1rem;
+  border: 2px outset;
+}
+
+.col[flagged] {
+  background-image: url("./img/flag.svg");
+  background-position: center;
+  background-size: contain;
+}
+
+.restart-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.col[revealed]:not(.exploded) {
+  background-color: #eee;
+  border: inset 2px;
+}
+
+.exploded {
+  background-color: red;
+  border-style: inset;
+  border-color: red;
+}
+
+.exploded[flagged] {
+  background-color: #ee0;
+  border-color: #ee0;
+  border-style: outset;
+}

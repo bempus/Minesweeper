@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minesweeper</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="main.js" defer></script>
+  </head>
+  <body>
+    <aside>
+      <div id="toggle-settings"><button>>></button></div>
+      <div id="settings">
+        <div>
+          <div>
+            <label for="grid">
+              Grid (<span grid>16</span>x<span grid>16</span>)
+            </label>
+          </div>
+          <input
+            type="range"
+            value="16"
+            id="grid"
+            min="3"
+            max="25"
+            data-value="16"
+          />
+        </div>
+        <hr />
+        <div>
+          <div>
+            <label for="mines">
+              Mines
+              <span id="mineDisplay">30</span></label
+            >
+          </div>
+          <input
+            type="range"
+            step="1"
+            value="30"
+            id="mines"
+            min="1"
+            max="85"
+            data-value="30"
+            inputmode="numeric"
+          />
+        </div>
+        <hr />
+        <div>
+          <div>
+            <label for="size"> Size <span id="sizeDisplay">1</span></label>
+          </div>
+          <input
+            type="range"
+            value="1"
+            id="size"
+            min="1"
+            step=".01"
+            max="2"
+            data-value="1"
+            inputmode="numeric"
+          />
+        </div>
+      </div>
+    </aside>
+    <main>
+      <div class="restart-container">
+        <div id="reset"><button>Restart</button></div>
+        <div>
+          <button id="revealAll">Reveal All</button>
+        </div>
+      </div>
+      <div class="game"></div>
+    </main>
+  </body>
+</html>
