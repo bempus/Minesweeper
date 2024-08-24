@@ -20,10 +20,10 @@ const gameBoard = document.querySelector(".game");
 const newGame = () => {
   if (config.mines > config.maxMines) config.mines = config.maxMines;
   if (config.rows < config.minRows) config.rows = config.minRows;
+  gameOver = false;
   defaultFace = "normal";
   setFace();
   gameBoard.innerHTML = "";
-  gameOver = false;
   let firstClick = true;
 
   const addMine = (exclude) => {
