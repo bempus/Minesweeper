@@ -123,6 +123,7 @@ const newGame = () => {
 
   const handleRightClick = (e) => {
     e.preventDefault();
+
     if (gameOver) return;
     if (e.target.getAttribute("revealed")) return;
     e.target.getAttribute("flagged")
@@ -152,19 +153,13 @@ const newGame = () => {
       col.classList.add("col");
       row.appendChild(col);
       col.id = `c${i}_${j}`;
-      col.onmouseup = handleClick;
+      col.onclick = handleClick;
       col.onmouseenter = (e) => {
-        console.log(e.buttons);
-
-        console.log(e.target.getAttribute("revealed"));
-
         if (
           e.buttons === 1 &&
           !e.target.getAttribute("revealed") &&
           !gameOver
         ) {
-          console.log(e.target.style);
-
           e.target.style.borderStyle = "inset";
         }
       };
@@ -268,6 +263,21 @@ main.addEventListener(
 );
 
 main.addEventListener("mouseout", (e) => setFace());
-main.addEventListener("mouseup", (e) => setFace());
+main.addEventListener("mouseup", (e) => {
+  if (e.button === 2) {
+    const ctxEvt = new MouseEvent("contextmenu", {
+      bubbles: false,
+      cancelable: false,
+      button: 2,
+      buttons: 0,
+    });
+
+    e.target.dispatchEvent();
+    return;
+  }
+  e.target.click();
+
+  setFace();
+});
 
 newGame();
