@@ -104,6 +104,7 @@ main {
 }
 
 .exploded {
+  background-image: url("./img/bomb.svg");
   background-color: red;
   border-style: inset;
   border-color: red;
@@ -113,4 +114,9 @@ main {
   background-color: #ee0;
   border-color: #ee0;
   border-style: outset;
+}
+
+[win] .exploded {
+  background-color: greenyellow;
+  border-color: green;
 }

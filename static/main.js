@@ -66,6 +66,7 @@ const newGame = () => {
     if (
       document.querySelectorAll(".col:not([revealed])").length === mines.size
     ) {
+      document.querySelector(".game").setAttribute("win", true);
       revealAll();
       gameOver = true;
       setTimeout(() => alert("Congratulations, you won!"), 250);
