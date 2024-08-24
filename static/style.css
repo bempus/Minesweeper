@@ -64,6 +64,7 @@ main {
   height: var(--boxSize);
   border: 1px solid;
   background-size: contain;
+  background-color: white;
 }
 
 .row {
