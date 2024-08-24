@@ -81,6 +81,8 @@ const newGame = () => {
       document.querySelector(".game").setAttribute("win", true);
       revealAll();
       gameOver = true;
+      defaultFace = "win";
+
       setTimeout(() => alert("Congratulations, you won!"), 250);
     }
   };
