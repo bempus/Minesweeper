@@ -65,6 +65,7 @@ main {
   border: 1px solid;
   background-size: contain;
   background-color: white;
+  user-select: none;
 }
 
 .row {

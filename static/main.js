@@ -5,15 +5,25 @@ const config = {
   minRows: 3,
   maxMines: 85,
 };
+let gameOver = false;
+let defaultFace = "normal";
+const resetBtn = document.querySelector("#reset");
+const resBtnImg = resetBtn.querySelector("img");
+
+const setFace = (face) => {
+  if (gameOver) return;
+  resBtnImg.src = `./img/face/${face || defaultFace}_nb.png`;
+};
 
 const gameBoard = document.querySelector(".game");
 
 const newGame = () => {
   if (config.mines > config.maxMines) config.mines = config.maxMines;
   if (config.rows < config.minRows) config.rows = config.minRows;
-
+  defaultFace = "normal";
+  setFace();
   gameBoard.innerHTML = "";
-  let gameOver = false;
+  gameOver = false;
   let firstClick = true;
 
   const addMine = (exclude) => {
@@ -88,6 +98,8 @@ const newGame = () => {
         }
         return handleClick(e);
       }
+      defaultFace = "angry";
+      setFace();
       return explode();
     }
     e.target.setAttribute("revealed", true);
@@ -139,7 +151,25 @@ const newGame = () => {
       col.classList.add("col");
       row.appendChild(col);
       col.id = `c${i}_${j}`;
-      col.onclick = handleClick;
+      col.onmouseup = handleClick;
+      col.onmouseenter = (e) => {
+        console.log(e.buttons);
+
+        console.log(e.target.getAttribute("revealed"));
+
+        if (
+          e.buttons === 1 &&
+          !e.target.getAttribute("revealed") &&
+          !gameOver
+        ) {
+          console.log(e.target.style);
+
+          e.target.style.borderStyle = "inset";
+        }
+      };
+      col.onmouseleave = (e) => {
+        e.target.style.borderStyle = null;
+      };
       col.oncontextmenu = handleRightClick;
     }
     document.querySelector(".game").appendChild(row);
@@ -227,6 +257,12 @@ document
     aside.setAttribute("expanded", true);
     e.target.textContent = "X";
   });
-document.querySelector("#reset").addEventListener("click", newGame);
+
+resetBtn.addEventListener("click", newGame);
+const main = document.querySelector("main");
+main.addEventListener("mouseover", (e) => e.buttons === 1 && setFace("scared"));
+
+main.addEventListener("mouseout", (e) => setFace());
+main.addEventListener("mouseup", (e) => setFace());
 
 newGame();
