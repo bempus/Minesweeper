@@ -218,13 +218,15 @@ document.querySelector("#reset").addEventListener("click", () => {
   newGame();
 });
 
-document.querySelector("#toggle-settings").addEventListener("click", (e) => {
-  const aside = document.querySelector("aside");
-  if (aside.getAttribute("expanded")) {
-    aside.removeAttribute("expanded");
-    e.target.textContent = ">>";
-    return;
-  }
-  aside.setAttribute("expanded", true);
-  e.target.textContent = "<<";
-});
+document
+  .querySelector("#toggle-settings-button")
+  .addEventListener("click", (e) => {
+    const aside = document.querySelector("aside");
+    if (aside.getAttribute("expanded")) {
+      aside.removeAttribute("expanded");
+      e.target.textContent = "V";
+      return;
+    }
+    aside.setAttribute("expanded", true);
+    e.target.textContent = "X";
+  });
