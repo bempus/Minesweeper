@@ -194,7 +194,7 @@ const newGame = () => {
       if (gameOver) return;
       gameOver = true;
       gameBoard.setAttribute("win", "cheat");
-      alert("You won, you cheater!");
+      setTimeout(() => alert("You won, you cheater!"), 250);
     }
   };
   document.querySelector("#revealAll").onclick = revealAll;
