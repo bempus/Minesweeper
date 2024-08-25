@@ -17,6 +17,12 @@ const setFace = (face) => {
 const gameBoard = document.querySelector(".game");
 
 const newGame = () => {
+  if (!window.localStorage.getItem("win")) {
+    window.localStorage.setItem("win", 0);
+  }
+  let wins = Number(window.localStorage.getItem("win"));
+  const winsContainer = document.querySelector("#wins");
+  winsContainer.textContent = wins;
   gameBoard.removeAttribute("win");
   if (config.mines > config.maxMines) config.mines = config.maxMines;
   if (config.rows < config.minRows) config.rows = config.minRows;
@@ -25,6 +31,14 @@ const newGame = () => {
   setFace();
   gameBoard.innerHTML = "";
   let firstClick = true;
+
+  const addWin = () => {
+    wins++;
+    console.log(wins);
+
+    window.localStorage.setItem("win", wins);
+    winsContainer.textContent = wins;
+  };
 
   const addMine = (exclude) => {
     const mine = `c${Math.floor(Math.random() * config.rows)}_${Math.floor(
@@ -83,7 +97,7 @@ const newGame = () => {
       revealAll();
       gameOver = true;
       defaultFace = "win";
-
+      addWin();
       setTimeout(() => alert("Congratulations, you won!"), 250);
     }
   };
@@ -194,7 +208,7 @@ const newGame = () => {
       defaultFace = "cheat_win";
       setFace();
       if (gameOver) return;
-
+      addWin();
       gameOver = true;
       gameBoard.setAttribute("win", "cheat");
       setTimeout(() => alert("You won, you cheater!"), 250);
