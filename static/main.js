@@ -191,7 +191,10 @@ const newGame = () => {
       el.style.backgroundImage = `url(./img/numbers/${adjacentMinesCount}.svg)`;
     });
     if (document.querySelector("#cheat").checked) {
+      defaultFace = "cheat_win";
+      setFace();
       if (gameOver) return;
+
       gameOver = true;
       gameBoard.setAttribute("win", "cheat");
       setTimeout(() => alert("You won, you cheater!"), 250);
