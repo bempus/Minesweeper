@@ -190,6 +190,12 @@ const newGame = () => {
 
       el.style.backgroundImage = `url(./img/numbers/${adjacentMinesCount}.svg)`;
     });
+    if (document.querySelector("#cheat").checked) {
+      if (gameOver) return;
+      gameOver = true;
+      gameBoard.setAttribute("win", "cheat");
+      alert("You won, you cheater!");
+    }
   };
   document.querySelector("#revealAll").onclick = revealAll;
 };
